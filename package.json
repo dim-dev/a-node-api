@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/dim-dev/a-node-api#readme",
   "dependencies": {
+    "body-parser": "^1.18.3",
     "debug": "^4.1.0",
     "express": "^4.16.4",
     "gulp": "^3.9.1",
