@@ -2,7 +2,7 @@ const express = require('express');
 const debug = require('debug')('appjs:');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const Book = require('./models/bookModel');
+
 
 const db = mongoose.connect('mongodb://localhost:27017/book-api', { useNewUrlParser: true });
 
@@ -12,32 +12,8 @@ const port = process.env.port || 3000;
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-const bookRouter = express.Router();
-
-bookRouter.route('/Books')
-  .post((req, res) => {
-    const book = new Book(req.body);
-    book.save();
-    res.status(201).send(book);
-  })
-  .get((req, res) => {
-    const query = {};
-    debug(req.query.genre);
-    if (req.query.genre) {
-      query.genre = req.query.genre;
-    }
-    Book.find(query, (err, books) => {
-      if (err) { res.status(500).send(err); } else { res.json(books); }
-    });
-  });
-
-bookRouter.route('/Books/:bookId')
-  .get((req, res) => {
-    Book.findById(req.params.bookId, (err, book) => {
-      if (err) { res.status(500).send(err); } else { res.json(book); }
-    });
-  });
+const Book = require('./models/bookModel');
+const bookRouter = require('./routes/bookRoutes')(Book);
 
 app.use('/api', bookRouter);
 
