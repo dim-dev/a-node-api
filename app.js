@@ -23,5 +23,5 @@ app.get('/', (req, res) => {
 });
 
 app.listen(port, () => {
-  debug(`Gulp is running on port: ${port}`);
+  debug(`express running on port: ${port}`);
 });
