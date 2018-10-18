@@ -16,11 +16,6 @@ const Book = require('./models/bookModel');
 const bookRouter = require('./routes/bookRoutes')(Book);
 
 app.use('/api/books', bookRouter);
-// app.use('api/authors',authorRouter);
-
-app.get('/', (req, res) => {
-  res.send('welcome to my api.');
-});
 
 app.listen(port, () => {
   debug(`express running on port: ${port}`);
